@@ -3,6 +3,18 @@ import 'package:karumart/Constants/customText.dart';
 import 'package:karumart/Responsiveness/responsive.dart';
 
 AppBar appBarLayout(context, GlobalKey<ScaffoldState> key){
+  double width = MediaQuery.of(context).size.width;
+  double height = MediaQuery.of(context).size.height;
+
+  List<String> pages = [
+    "Overview",
+    "Dashboard",
+    "Market",
+    "Profile",
+  ];
+
+  int selected = 0;
+
   return AppBar(
     toolbarHeight: ResponsiveScreen.isSmallScreen(context) ? 50 : 65,
     elevation: 1,
@@ -39,14 +51,43 @@ AppBar appBarLayout(context, GlobalKey<ScaffoldState> key){
         CustomText(
           text: "Karu-Mart",
           fontSize: 25,
-          // fontWeight: FontWeight.bold,
           letterSpacing: 1.2,
           color: Colors.white,
         ),
-        Expanded(child: Container()),
-        const Icon(
-          Icons.settings,
+        SizedBox(
+          width: width * 0.1,
         ),
+        ...List.generate(
+          pages.length, 
+          (index) => Row(
+            children: [
+              GestureDetector(
+                onTap: (){
+                  selected = index;
+                },
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    CustomText(
+                      text: pages[index],
+                      color: Colors.white70,
+                    ),
+                    selected == index ? const SizedBox(height: 2) : Container(),
+                    selected == index ? Container(
+                      width: 30,
+                      height: 2,
+                      color: Colors.white70,
+                    ) : Container(),
+                  ],
+                ),
+              ),
+              SizedBox(
+                width: width * 0.02,
+              ),
+            ],
+          ),
+        ),
+        Expanded(child: Container()),
         const SizedBox(width: 10),
         Stack(
           children: const [

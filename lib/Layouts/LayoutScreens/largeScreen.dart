@@ -17,17 +17,8 @@ class _LargeScreenState extends State<LargeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Row(
-        children: [
+        children: const [
           Expanded(
-            flex: 1,
-            child: Column(
-              children: const [
-                SizedBox(height: 50),
-                SideNavigation(),
-              ],
-            ),
-          ),
-          const Expanded(
             flex: 5,
             child: OverViewPage(),
           ),
